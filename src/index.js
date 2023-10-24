@@ -1,11 +1,13 @@
 const express =require('express')
 const app = express();
 require('./database');
+const cors = require('cors')
 
 
-
-
-app.use(require('./routes/userRoutes'))
+//convertir datos que recibe el servidor en json
+app.use(cors());
+app.use(express.json());
+app.use(require('./routes/userRoutes'));
 
 
 
