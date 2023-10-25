@@ -75,6 +75,24 @@ route.put('/update-patient/:id', async (req, res) => {
   }
 });
 
+//delete patient
+
+route.delete('/delete-patient/:id', async (req, res) => {
+  const patientId = req.params.id;
+
+  try {
+    // Busca al paciente por ID y elimínalo
+    const deletedPatient = await Patient.findByIdAndRemove(patientId);
+
+    if (deletedPatient) {
+      res.json({ message: 'Paciente eliminado con éxito' });
+    } else {
+      res.status(404).json({ message: 'Paciente no encontrado' });
+    }
+  } catch (err) {
+    res.status(500).json({ message: 'Error al eliminar al paciente', error: err });
+  }
+});
 
 //metodos para los usuarios
 //method for register
